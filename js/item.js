@@ -21,6 +21,16 @@ document.querySelectorAll(".contain .nav ul li").forEach((item) => {
     }
   });
 });
+const detail_icon = document.querySelector(
+  ".contain .video .message .title .detail-icon"
+);
+detail_icon.addEventListener("click", () => {
+  const detail = document.querySelector(".contain .video .message .detail");
+  console.log("detail_icon");
+  document.querySelector(".contain .nav-box .video").style.display = "none";
+  document.querySelector(".contain .nav-box .comment").style.display = "none";
+  document.querySelector(".contain .nav-box .detail").style.display = "block";
+});
 
 const comment_box = document.querySelector(".contain .comment-box");
 const comment_input = document.querySelector(".contain .post-box input");

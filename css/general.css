@@ -47,10 +47,6 @@ nav .right .search-box input {
   background: none;
 }
 
-nav .right .search-box :hover {
-  border: 1px #ced4da solid;
-}
-
 nav .right .search-box button {
   display: flex;
   align-items: center;
