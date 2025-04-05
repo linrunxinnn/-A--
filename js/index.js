@@ -53,6 +53,28 @@ document
     console.log(1);
   });
 
+// 广告导航点点击事件
+document.querySelectorAll(".advertise ul li").forEach((item) => {
+  item.addEventListener("click", () => {
+    console.log("点击导航点，data-id:", item.dataset.id);
+    console.log(
+      "当前显示图片:",
+      document.querySelector('.advertise .img-box img[style*="block"]')?.dataset
+        .id
+    );
+
+    clearInterval(autoPlay);
+    showSlide(Number(item.dataset.id));
+    autoPlay = setInterval(nextSlide, 3000);
+
+    console.log(
+      "切换后图片:",
+      document.querySelector('.advertise .img-box img[style*="block"]')?.dataset
+        .id
+    );
+  });
+});
+
 // 展示部分
 document.querySelectorAll(".main-contain .head ul li").forEach((item) => {
   item.addEventListener("click", () => {
