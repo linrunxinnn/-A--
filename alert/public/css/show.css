@@ -508,6 +508,7 @@ nav .nav .sign-box .drop-down .enter:hover {
   margin: -20px -10px 0 -20px;
   position: sticky;
   top: -20px;
+  cursor: pointer;
 }
 
 .main .contain .nav .head .active {
@@ -750,6 +751,7 @@ nav .nav .sign-box .drop-down .enter:hover {
   display: grid;
   grid-template-columns: 1fr 5fr;
   gap: 10px;
+  width: 100%;
 }
 
 .main .contain .item-box .item .left .img-box {
@@ -825,23 +827,12 @@ nav .nav .sign-box .drop-down .enter:hover {
   gap: 5px;
 }
 
-.main
-  .contain
-  .item-box
-  .item
-  .right
-  .drop-item-box
-  .drop-item:nth-last-child(1) {
+.main .contain .item-box .item {
   border-bottom: 0.8px solid #868e96;
   padding-bottom: 10px;
 }
 
-.main
-  .contain
-  .item-box
-  .item:nth-last-child(1)
-  .drop-item-box
-  .drop-item:nth-last-child(1) {
+.main .contain .item-box .item:nth-last-child(1) {
   border-bottom: none;
 }
 
