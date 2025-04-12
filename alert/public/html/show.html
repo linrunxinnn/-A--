@@ -10,7 +10,11 @@
     <nav>
       <div class="logo" style="display: flex; align-items: center; gap: 20px">
         <h1>iQIYI</h1>
-        <h3 style="color: aliceblue; cursor: pointer"><a href="#">首页</a></h3>
+        <h4 style="color: aliceblue; cursor: pointer"><a href="#">首页</a></h4>
+        <h4 style="color: aliceblue; cursor: pointer">
+          <a href="#">电视剧</a>
+        </h4>
+        <h4 style="color: aliceblue; cursor: pointer"><a href="#">电影</a></h4>
       </div>
       <div class="nav">
         <div class="input-box">
@@ -364,7 +368,8 @@
         <div class="video">
           <div class="vedio-contain">
             <div class="contian">
-              <img src="../img/屏幕截图 2025-02-23 115956.png" />
+              <!-- <img src="../img/屏幕截图 2025-02-23 115956.png" /> -->
+              <video src="../img/屏幕录制 2025-03-04 230748.mp4"></video>
             </div>
           </div>
           <div class="head">
@@ -396,7 +401,7 @@
           <div class="tool">
             <svg
               t="1744033532766"
-              class="icon"
+              class="cut-icon"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -410,8 +415,9 @@
                 p-id="30151"
               ></path>
             </svg>
+            <canvas id="canvas" style="display: none"></canvas>
           </div>
-          <div class="shrink">
+          <div class="shrink" data-shrink="1">
             <div class="large">
               <svg
                 t="1744033834550"
@@ -430,70 +436,64 @@
                 ></path>
               </svg>
             </div>
-            <div class="min" style="display: none">
-              <svg
-                t="1744033874292"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="34330"
-                width="20"
-                height="20"
-              >
-                <path
-                  d="M671.968176 911.99957c-12.287381 0-24.576482-4.67206-33.951566-14.047144L286.048434 545.984249c-18.751888-18.719204-18.751888-49.12028 0-67.872168L638.016611 126.111222c18.751888-18.751888 49.12028-18.751888 67.872168 0 18.751888 18.719204 18.751888 49.12028 0 67.872168l-318.016611 318.047574L705.888778 830.047574c18.751888 18.751888 18.751888 49.12028 0 67.872168C696.544658 907.32751 684.255557 911.99957 671.968176 911.99957z"
-                  fill="#e6e6e6"
-                  p-id="34331"
-                ></path>
-              </svg>
-            </div>
           </div>
           <div class="bar">
             <div class="progress">
               <span>start</span>
-              <div class="progress-bar"></div>
+              <input
+                type="range"
+                id="progress"
+                value="0"
+                class="progress-bar"
+              />
+
               <span>end</span>
             </div>
             <div class="control">
               <div class="play">
-                <svg
-                  t="1744034099912"
+                <button
                   class="play-icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="35430"
-                  width="24"
-                  height="24"
+                  style="background: none; border: none"
                 >
-                  <path
-                    d="M161.2 839.9v-654c0-56.1 60.7-91.1 109.3-63.1l566.3 327c48.6 28 48.6 98.1 0 126.2L270.4 903c-48.5 28-109.2-7.1-109.2-63.1z"
-                    fill="#e6e6e6"
-                    p-id="35431"
-                  ></path>
-                </svg>
-                <svg
-                  t="1744034137027"
-                  class="next-icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="37431"
-                  width="24"
-                  height="24"
-                >
-                  <path
-                    d="M721.454545 551.563636L302.545455 795.927273c-30.254545 18.618182-69.818182-4.654545-69.818182-39.563637v-488.727272c0-34.909091 39.563636-58.181818 69.818182-39.563637l418.90909 244.363637c30.254545 16.290909 30.254545 62.836364 0 79.127272z"
-                    p-id="37432"
-                    fill="#e6e6e6"
-                  ></path>
-                  <path
-                    d="M791.272727 684.218182c0 32.581818-30.254545 60.509091-69.818182 60.509091s-69.818182-27.927273-69.818181-60.509091V339.781818c0-32.581818 30.254545-60.509091 69.818181-60.509091s69.818182 27.927273 69.818182 60.509091v344.436364z"
-                    p-id="37433"
-                    fill="#e6e6e6"
-                  ></path>
-                </svg>
+                  <svg
+                    t="1744034099912"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="35430"
+                    width="24"
+                    height="24"
+                  >
+                    <path
+                      d="M161.2 839.9v-654c0-56.1 60.7-91.1 109.3-63.1l566.3 327c48.6 28 48.6 98.1 0 126.2L270.4 903c-48.5 28-109.2-7.1-109.2-63.1z"
+                      fill="#e6e6e6"
+                      p-id="35431"
+                    ></path>
+                  </svg>
+                </button>
+                <span>
+                  <svg
+                    t="1744034137027"
+                    class="next-icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="37431"
+                    width="24"
+                    height="24"
+                  >
+                    <path
+                      d="M721.454545 551.563636L302.545455 795.927273c-30.254545 18.618182-69.818182-4.654545-69.818182-39.563637v-488.727272c0-34.909091 39.563636-58.181818 69.818182-39.563637l418.90909 244.363637c30.254545 16.290909 30.254545 62.836364 0 79.127272z"
+                      p-id="37432"
+                      fill="#e6e6e6"
+                    ></path>
+                    <path
+                      d="M791.272727 684.218182c0 32.581818-30.254545 60.509091-69.818182 60.509091s-69.818182-27.927273-69.818181-60.509091V339.781818c0-32.581818 30.254545-60.509091 69.818181-60.509091s69.818182 27.927273 69.818182 60.509091v344.436364z"
+                      p-id="37433"
+                      fill="#e6e6e6"
+                    ></path>
+                  </svg>
+                </span>
               </div>
               <div class="comment">
                 <svg
@@ -553,10 +553,21 @@
                 <span>登录</span>
                 <input type="text" placeholder="说一句" />
               </div>
+
               <div class="view">
-                <span>倍速</span>
-                <span>720P</span>
-                <span>选集</span>
+                <select class="speed">
+                  <option value="0.5">0.5x</option>
+                  <option value="1" selected>1x</option>
+                  <option value="1.5">1.5x</option>
+                  <option value="2">2x</option>
+                </select>
+                <select class="resolution">
+                  <option value="0.5">1080p</option>
+                  <option value="1" selected>4K</option>
+                  <option value="1.5">清晰</option>
+                  <option value="2">流畅</option>
+                </select>
+                <span class="select select-head">选集 </span>
               </div>
               <div class="full">
                 <svg
@@ -628,6 +639,10 @@
                     p-id="44320"
                   ></path>
                 </svg>
+                <div class="voice-scroll">
+                  <span>0%</span>
+                  <input type="range" id="voice" value="0" class="voice-bar" />
+                </div>
               </div>
             </div>
           </div>
@@ -776,15 +791,15 @@
                 <span>num</span>
               </div>
               <div class="select-box">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
-                <span>6</span>
-                <span>7</span>
-                <span>8</span>
-                <span>9</span>
+                <span class="active" data-select="1">1</span>
+                <span data-select="2">2</span>
+                <span data-select="3">3</span>
+                <span data-select="4">4</span>
+                <span data-select="5">5</span>
+                <span data-select="6">6</span>
+                <span data-select="7">7</span>
+                <span data-select="8">8</span>
+                <span data-select="9">9</span>
               </div>
               <div class="all">
                 <span>查看全部</span>

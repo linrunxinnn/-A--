@@ -37,7 +37,7 @@ navList.forEach((item) => {
 
     showItem.forEach((x) => {
       x.dataset.box === id
-        ? (x.style.display = "block")
+        ? (x.style.display = "flex")
         : (x.style.display = "none");
     });
   });
@@ -46,7 +46,7 @@ detailList.addEventListener("click", (e) => {
   const id = "detail";
   showItem.forEach((x) => {
     x.dataset.box === id
-      ? (x.style.display = "block")
+      ? (x.style.display = "flex")
       : (x.style.display = "none");
   });
 });
@@ -289,3 +289,230 @@ document
       }
     }
   });
+
+//播放器
+const vedio = document.querySelector(
+  ".main .contain .video .vedio-contain .contian video"
+);
+const playPause = document.querySelector(
+  ".main .contain .video .bar .control .play .play-icon"
+);
+const next = document.querySelector(
+  ".main .contain .video .bar .control .play .next-icon"
+);
+const commentPlay = document.querySelector(
+  ".main .contain .video .bar .control .comment .play-icon"
+);
+const commentSet = document.querySelector(
+  ".main .contain .video .bar .control .comment .set-icon"
+);
+const vedioInput = document.querySelector(
+  ".main .contain .video .bar .control .input-box input"
+);
+const speed = document.querySelector(
+  ".main .contain .video .bar .control .view .speed"
+);
+const resolution = document.querySelector(
+  ".main .contain .video .bar .control .view .resolution"
+);
+const select = document.querySelector(
+  ".main .contain .video .bar .control .view .select"
+);
+const vedioSet = document.querySelector(
+  ".main .contain .video .bar .control .full set-icon"
+);
+const voice = document.querySelector(
+  ".main .contain .video .bar .control .full .voice-icon"
+);
+const voiceScroll = document.querySelector(
+  ".main .contain .video .bar .control .full .voice-scroll"
+);
+const shrink = document.querySelector(
+  ".main .contain .video .bar .control .full .shrink-icon"
+);
+const fullScreen = document.querySelector(
+  ".main .contain .video .bar .control .full .full-icon"
+);
+const progress = document.querySelector(
+  ".main .contain .video .bar .progress input"
+);
+
+playPause.addEventListener("click", () => {
+  if (vedio.paused) {
+    vedio.play();
+    playPause.innerHTML = `<svg t="1744241381949" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14554" width="24" height="24"><path d="M128 106.858667C128 94.976 137.621333 85.333333 149.12 85.333333h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333H149.12A21.290667 21.290667 0 0 1 128 917.141333V106.88z m640 0c0-11.882667 9.621333-21.525333 21.12-21.525334h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333h-85.76a21.290667 21.290667 0 0 1-21.12-21.525333V106.88z" fill="#dbdbdb" p-id="14555"></path></svg>`;
+  } else {
+    vedio.pause();
+    playPause.innerHTML = `<svg t="1744242021063" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15660" width="24" height="24"><path d="M161.2 839.9v-654c0-56.1 60.7-91.1 109.3-63.1l566.3 327c48.6 28 48.6 98.1 0 126.2L270.4 903c-48.5 28-109.2-7.1-109.2-63.1z" fill="#dbdbdb" p-id="15661"></path></svg>`;
+  }
+});
+let clickTimer = null;
+vedio.addEventListener("click", () => {
+  clickTimer = setTimeout(() => {
+    if (vedio.paused) {
+      vedio.play();
+      playPause.innerHTML = `<svg t="1744241381949" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14554" width="24" height="24"><path d="M128 106.858667C128 94.976 137.621333 85.333333 149.12 85.333333h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333H149.12A21.290667 21.290667 0 0 1 128 917.141333V106.88z m640 0c0-11.882667 9.621333-21.525333 21.12-21.525334h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333h-85.76a21.290667 21.290667 0 0 1-21.12-21.525333V106.88z" fill="#dbdbdb" p-id="14555"></path></svg>`;
+    } else {
+      vedio.pause();
+      playPause.innerHTML = `<svg t="1744242021063" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15660" width="24" height="24"><path d="M161.2 839.9v-654c0-56.1 60.7-91.1 109.3-63.1l566.3 327c48.6 28 48.6 98.1 0 126.2L270.4 903c-48.5 28-109.2-7.1-109.2-63.1z" fill="#dbdbdb" p-id="15661"></path></svg>`;
+    }
+  }, 250);
+});
+vedio.addEventListener("dblclick", () => {
+  clearTimeout(clickTimer); // 阻止单击的执行
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    vedio.requestFullscreen();
+  }
+});
+
+function updateProgressBar() {
+  const val =
+    ((progress.value - progress.min) / (progress.max - progress.min)) * 100;
+  progress.style.setProperty("--progress", `${val}%`);
+}
+
+vedio.addEventListener("timeupdate", () => {
+  progress.value = (vedio.currentTime / vedio.duration) * 100;
+  progress.style.backgroundSize = progress.value + "% 100%";
+  updateProgressBar();
+});
+progress.addEventListener("input", () => {
+  vedio.currentTime = (progress.value / 100) * vedio.duration;
+  progress.style.backgroundSize = progress.value + "% 100%";
+  updateProgressBar();
+});
+
+let vedioListSelectIndex = 1;
+const vedioListSelect = document.querySelector(
+  ".main .contain .nav .select .select-box"
+);
+next.addEventListener("click", () => {
+  vedioListSelectIndex++;
+  if (vedioListSelectIndex > vedioListSelect.children.length) {
+    vedioListSelectIndex = 1; // Reset to 1 since data-select likely starts at 1
+  }
+
+  vedioListSelect.querySelectorAll("span").forEach((item) => {
+    // Convert data-select to number for proper comparison
+    if (parseInt(item.dataset.select) === vedioListSelectIndex) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
+    }
+  });
+});
+vedioListSelect.addEventListener("click", (e) => {
+  if (e.target.tagName === "SPAN") {
+    const id = e.target.dataset.select;
+    vedioListSelect.querySelectorAll("span").forEach((item) => {
+      if (item.dataset.select === id) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+  }
+});
+
+fullScreen.addEventListener("click", () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    vedio.requestFullscreen();
+  }
+});
+shrink.addEventListener("click", async () => {
+  if (document.pictureInPictureElement) {
+    document.exitPictureInPicture();
+  } else {
+    await vedio.requestPictureInPicture();
+  }
+});
+
+voice.addEventListener("click", () => {
+  voiceScroll.classList.toggle("active");
+});
+voiceScroll.addEventListener("input", (e) => {
+  const volume = e.target.value / 100;
+  vedio.volume = volume;
+  const volumeDisplay = voiceScroll.querySelector("span");
+  if (volumeDisplay) {
+    volumeDisplay.textContent = Math.round(volume * 100) + "%";
+  }
+});
+voiceScroll.addEventListener("mouseleave", () => [
+  voiceScroll.classList.remove("active"),
+]);
+
+//截图
+const canvas = document.getElementById("canvas");
+const cutImg = document.querySelector(".main .contain .video .tool");
+cutImg.addEventListener("click", () => {
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = vedio.videoWidth;
+  canvas.height = vedio.videoHeight;
+  ctx.drawImage(vedio, 0, 0, canvas.width, canvas.height);
+  const imgData = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.href = imgData;
+  link.download = "截图.png";
+  link.click();
+});
+
+//收缩
+const shrinkIcon = document.querySelector(".main .contain .video .shrink");
+shrinkIcon.addEventListener("click", () => {
+  if (shrinkIcon.dataset.shrink === "1") {
+    shrinkIcon.dataset.shrink = "2";
+    shrinkIcon.innerHTML = `
+      <div class="min">
+              <svg
+                t="1744033874292"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="34330"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M671.968176 911.99957c-12.287381 0-24.576482-4.67206-33.951566-14.047144L286.048434 545.984249c-18.751888-18.719204-18.751888-49.12028 0-67.872168L638.016611 126.111222c18.751888-18.751888 49.12028-18.751888 67.872168 0 18.751888 18.719204 18.751888 49.12028 0 67.872168l-318.016611 318.047574L705.888778 830.047574c18.751888 18.751888 18.751888 49.12028 0 67.872168C696.544658 907.32751 684.255557 911.99957 671.968176 911.99957z"
+                  fill="#e6e6e6"
+                  p-id="34331"
+                ></path>
+              </svg>
+            </div>
+    `;
+    document.querySelector(".main .contain .nav").style.display = "none";
+    document.querySelector(".main .contain").style.display = "block";
+  } else {
+    shrinkIcon.dataset.shrink = "1";
+    shrinkIcon.innerHTML = `
+      <div class="large">
+              <svg
+                t="1744033834550"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="32050"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M761.055557 532.128047c0.512619-0.992555 1.343475-1.823411 1.792447-2.848649 8.800538-18.304636 5.919204-40.703346-9.664077-55.424808L399.935923 139.743798c-19.264507-18.208305-49.631179-17.344765-67.872168 1.888778-18.208305 19.264507-17.375729 49.631179 1.888778 67.872168l316.960409 299.839269L335.199677 813.631716c-19.071845 18.399247-19.648112 48.767639-1.247144 67.872168 9.407768 9.791372 21.984142 14.688778 34.560516 14.688778 12.000108 0 24.000215-4.479398 33.311652-13.439914l350.048434-337.375729c0.672598-0.672598 0.927187-1.599785 1.599785-2.303346 0.512619-0.479935 1.056202-0.832576 1.567101-1.343475C757.759656 538.879828 759.199462 535.391265 761.055557 532.128047z"
+                  fill="#e6e6e6"
+                  p-id="32051"
+                ></path>
+              </svg>
+            </div>
+    `;
+    document.querySelector(".main .contain").style.display = "grid";
+    document.querySelector(".main .contain .nav").style.display = "block";
+  }
+});
