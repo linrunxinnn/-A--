@@ -34,7 +34,7 @@ nav {
   top: 0;
   left: 0;
   opacity: 00.8;
-  z-index: 2;
+  z-index: 5;
 }
 
 nav .logo {
@@ -55,10 +55,11 @@ nav .nav .input-box {
   width: 500px;
   padding: 0 16px;
   background-color: #212529;
-  border: 2px solid #343a40;
+  border: 2px solid transparent;
   border-radius: 5px;
   transition: all 0.3s ease;
-  overflow: hidden;
+  /* overflow: hidden; */
+  position: relative;
 }
 
 nav .nav .input-box input {
@@ -86,15 +87,152 @@ nav .nav .input-box .search-icon {
 }
 
 nav .nav .input-box:hover {
+  transition: all 0.3s ease;
   border: 2px solid #868e96;
+  .drop-down {
+    display: flex;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+}
+
+nav .nav .input-box:focus-within {
+  border: 2px solid #868e96;
+  transition: all 0.3s ease;
+  .search-icon {
+    background-color: #0ccc4c;
+    transition: all 0.7s ease;
+  }
+  .search-icon:hover {
+    background-color: #37b24d;
+    transition: all 0.7s ease;
+  }
+  .drop-down {
+    display: flex;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
 }
 
 nav .nav .input-box:hover .search-icon {
   background-color: #0ccc4c;
   transition: all 0.7s ease;
+  cursor: pointer;
+}
+
+nav .nav .input-box > .drop-down {
+  display: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  position: absolute;
+  top: 103%;
+  left: 0;
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px;
+  flex-direction: column;
+  background-color: #212529;
+  z-index: 5;
+  gap: 10px;
+  .history {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .head {
+        font-size: 16px;
+      }
+      .icon {
+        color: #868e96;
+        cursor: pointer;
+      }
+    }
+    .icon:hover {
+      color: #0ccc4c;
+      transition: all 0.3s ease;
+    }
+    ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+      li {
+        padding: 5px 10px;
+        background-color: #343a40;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 5px;
+        white-space: nowrap;
+      }
+      li:hover {
+        background-color: #868e96;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+  .hot-search > .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 0;
+    color: #868e96;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    div:hover {
+      color: #0ccc4c;
+      transition: all 0.3s ease;
+    }
+  }
+  .hot-search {
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 5px 0;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 3px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      li:hover {
+        .text {
+          color: #0ccc4c;
+          transition: all 0.3s ease;
+        }
+        transition: all 0.3s ease;
+      }
+      .num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 3px;
+      }
+      [data-order="1"] {
+        background-color: #e03131;
+      }
+      [data-order="2"] {
+        background-color: #f08c00;
+      }
+      [data-order="3"] {
+        background-color: #fcc419;
+      }
+    }
+  }
 }
 
 nav .nav .nav-vip {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -108,6 +246,7 @@ nav .nav .nav-vip .nav-vip-icon {
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 
 nav .nav .nav-vip svg,
@@ -328,6 +467,7 @@ nav .nav .sign-box .drop-down .enter:hover {
   gap: 10px;
   padding: 10px 40px 10px 20px;
   margin: 0 -20px 0 -10px;
+  cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
 }
@@ -350,6 +490,7 @@ nav .nav .sign-box .drop-down .enter:hover {
 /* 主页 */
 .main .box {
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: -1;
@@ -370,13 +511,15 @@ nav .nav .sign-box .drop-down .enter:hover {
 
 .main .advertise .ad-content {
   width: 100%;
-  height: 550px;
+  max-height: 600px;
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.main .advertise .ad-content img {
+.main .advertise .ad-content img,
+.main .advertise .ad-content video {
   width: 100%;
   height: auto;
 }
@@ -393,6 +536,7 @@ nav .nav .sign-box .drop-down .enter:hover {
   padding: 10px 20px;
   margin: 0 -20px;
   font-size: 15px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -406,7 +550,7 @@ nav .nav .sign-box .drop-down .enter:hover {
 
 .main .show-box {
   /* 和上方广告的间距 */
-  margin-top: 520px;
+  margin-top: 600px;
   background: linear-gradient(to bottom, #111214, #090a0c);
   box-shadow: 0 -10px 50px 40px #111214;
   z-index: 1;
@@ -589,6 +733,7 @@ nav .nav .sign-box .drop-down .enter:hover {
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(3, 1fr);
+  cursor: pointer;
 }
 
 .main .show-box .love-box .head {
